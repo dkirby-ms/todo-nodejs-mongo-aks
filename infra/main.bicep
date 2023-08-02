@@ -92,6 +92,36 @@ module monitoring './core/monitor/monitoring.bicep' = {
   }
 }
 
+// Configures an Eventhub instance
+module eventhub './core/messaging/eventhub.bicep' = if (useEventhub) {
+  name: 'eventhub-deployment'
+  scope: rg
+  params: {
+    location: location
+    projectName: 'todo-eventhub'
+  }
+}
+
+// Configures PostgreSQL Flexible server
+module postgresql './core/database/postgresql/flexibleserver.bicep' = {
+  name: 'postgresql-deployment'
+  scope: rg
+  params: {
+    name: 'todo-postgresql'
+    location: location
+    sku: {
+      name: 'Standard_D4ds_v4'
+      tier: 'GeneralPurpose'
+    }
+    storage: {
+      storageSizeGB: 128
+    }
+    administratorLogin: 'todoadmin'
+    administratorLoginPassword: 'todopassword'
+    version: '12'
+  }
+}
+
 // Data outputs
 output AZURE_COSMOS_CONNECTION_STRING_KEY string = cosmos.outputs.connectionStringKey
 output AZURE_COSMOS_DATABASE_NAME string = cosmos.outputs.databaseName
