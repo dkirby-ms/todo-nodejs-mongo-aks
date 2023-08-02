@@ -93,7 +93,7 @@ module monitoring './core/monitor/monitoring.bicep' = {
 }
 
 // Configures an Eventhub instance
-module eventhub './core/messaging/eventhub.bicep' = if (useEventhub) {
+module eventhub './core/messaging/eventhub.bicep' = {
   name: 'eventhub-deployment'
   scope: rg
   params: {
