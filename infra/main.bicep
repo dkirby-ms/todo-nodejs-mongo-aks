@@ -119,6 +119,19 @@ module postgresql './core/database/postgresql/flexibleserver.bicep' = {
     administratorLogin: 'todoadmin'
     administratorLoginPassword: 'todopassword'
     version: '12'
+    tags: tags
+  }
+}
+
+// Configures storage account
+module storageAccount './core/storage/storage-account.bicep' = {
+  name: 'storageAccount-deployment'
+  scope: rg
+  params: {
+    name: '${abbrs.operationalInsightsWorkspaces}${resourceToken}'
+    location: location
+    tags: tags
+    containers: ['content', 'processed']
   }
 }
 
