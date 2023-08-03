@@ -132,8 +132,14 @@ module storageAccount './core/storage/storage-account.bicep' = {
     location: location
     tags: tags
     containers: [ 
-      'content'
-      'output'
+      {
+        name: 'content${resourceToken}'
+        publicAccess: 'Blob'
+      }
+      {
+        name: 'output${resourceToken}'
+        publicAccess: 'Blob'
+      }
     ]
   }
 }
