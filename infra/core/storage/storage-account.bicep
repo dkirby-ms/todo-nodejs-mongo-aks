@@ -41,6 +41,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
     minimumTlsVersion: minimumTlsVersion
     networkAcls: networkAcls
     publicNetworkAccess: publicNetworkAccess
+    supportsHttpsTrafficOnly: true
   }
 
   resource blobServices 'blobServices' = if (!empty(containers)) {
