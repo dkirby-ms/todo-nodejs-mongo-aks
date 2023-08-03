@@ -128,10 +128,13 @@ module storageAccount './core/storage/storage-account.bicep' = {
   name: 'storageAccount-deployment'
   scope: rg
   params: {
-    name: '${abbrs.operationalInsightsWorkspaces}${resourceToken}'
+    name: '${abbrs.storageStorageAccounts}${resourceToken}'
     location: location
     tags: tags
-    containers: ['content', 'processed']
+    containers: [ 
+      'content'
+      'output'
+    ]
   }
 }
 
